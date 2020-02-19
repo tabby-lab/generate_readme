@@ -77,14 +77,20 @@ function askQuestion() {
 ## User Name: ${data.userName}
 ### Description: ${data.description}
 ### Table of Contents:
+    License
+    Installation
+    Test
+    Questions
 
-       
-        
-License: You need this license for this project:
+### License: 
+You need this license for this project: 
 ${data.license}
-### Installation: Please use the following command to install dependencies: **${data.command}**
-Repo: ${data.repo}
-### Test: Please use the following command to run tests--> **${data.runTest}**
+### Installation: 
+Please use the following command to install dependencies: **${data.command}**
+### Repo: ${data.repo}
+### Test: 
+Please use the following command to run tests--> **${data.runTest}**
+### Questions: 
 ![alt text](${data.avatar_url})
     `;
 
