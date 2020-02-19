@@ -73,10 +73,11 @@ function askQuestion() {
         axios.get(queryurl).then(function (response) {
             data.avatar_url = response.data.avatar_url
             let body = `
-## User Name: ${data.userName}
 ## Project Name: ${data.projectName}
+## User Name: ${data.userName}
 ### Description: ${data.description}
 ### Table of Contents:
+
        
         
 License: You need this license for this project:
@@ -87,7 +88,7 @@ Repo: ${data.repo}
 ![alt text](${data.avatar_url})
     `;
 
-            fs.writeFile("README.md", body, function (error) {
+            fs.writeFile("README.md", license + body, function (error) {
                 if (error) {
                     console.log(error)
                 }
