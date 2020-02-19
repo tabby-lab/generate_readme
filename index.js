@@ -1,7 +1,7 @@
 const inquirer = require("inquirer")
-const fs=require("fs")
-let data={}
-const axios=require("axios")
+const fs = require("fs")
+let data = {}
+const axios = require("axios")
 // What is your GitHub username? <user_will_provide_github_username>
 // What is your project's name?
 // Please write a short description of your project?
@@ -10,6 +10,10 @@ const axios=require("axios")
 // What command should be run to run tests? (default to "npm test" if user doesn't respond)
 // What does the user need to know about using the repo?
 // What does the user need to know about contributing to the repo?
+
+
+//creating all questions
+
 function askQuestion() {
     inquirer.prompt([
         {
@@ -48,40 +52,47 @@ function askQuestion() {
             message: "What does the user need to know about using the repo?",
             name: "repo"
         }
-    ]).then(function(input){
+    ]).then(function (input) {
 
 
-        data.userName=input.userName
-        data.projectName=input.projectName
-        data.description=input.description
-        data.license=input.license
-        data.command=input.command
-        data.runTest=input.runTest
-        data.repo=input.repo
+        data.userName = input.userName
+        data.projectName = input.projectName
+        data.description = input.description
+        data.license = input.license
+        data.command = input.command
+        data.runTest = input.runTest
+        data.repo = input.repo
 
-        let userName =data.userName
-let queryurl = "https://api.github.com/users/" + userName
-        axios.get(queryurl).then(function(response){ 
-
-
-            data.avatar_url=response.data.avatar_url
-        let body=`
-        userName: ${data.userName}
-        projectName: ${data.projectName}
-        description: ${data.description}
-        license: ${data.license}
-        command: ${data.command}
-        runTest:${data.runTest}
-        repo: ${data.repo}
-        ![alt text](${data.avatar_url})
-    `
-    
-    fs.writeFile("README.md",body,function(error){
-        if (error){
-            console.log(error)
+        let userName = data.userName
+        let queryurl = "https://api.github.com/users/" + userName
+        let license = data.license
+        if (license == 'Apache 2.0') {
+            license = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
         }
-        console.log("success")
-    })
+        //this is to grab user github then grabs the info from api
+        axios.get(queryurl).then(function (response) {
+            data.avatar_url = response.data.avatar_url
+            let body = `
+## User Name: ${data.userName}
+## Project Name: ${data.projectName}
+### Description: ${data.description}
+### Table of Contents:
+       
+        
+License: You need this license for this project:
+${data.license}
+### Installation: Please use the following command to install dependencies: **${data.command}**
+Repo: ${data.repo}
+### Test: Please use the following command to run tests--> **${data.runTest}**
+![alt text](${data.avatar_url})
+    `;
+
+            fs.writeFile("README.md", body, function (error) {
+                if (error) {
+                    console.log(error)
+                }
+                console.log("success")
+            })
 
         })
 
@@ -89,11 +100,16 @@ let queryurl = "https://api.github.com/users/" + userName
 
 
     })
-    
-   
+
+
 }
 
 
 askQuestion()
 
 
+
+
+//we need one badge 
+//this is apache 2.0
+//[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
