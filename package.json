@@ -19,6 +19,8 @@
   "homepage": "https://github.com/tabby-lab/generate_readme#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "inquirer": "^7.0.4"
+    "inquirer": "^7.0.4",
+    "markdown-pdf": "^10.0.0",
+    "pdfkit": "^0.11.0"
   }
 }

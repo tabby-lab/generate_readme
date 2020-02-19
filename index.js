@@ -1,3 +1,5 @@
+const PDFDocument= require("pdfkit")
+const markdownpdf=require("markdown-pdf")
 const inquirer = require("inquirer")
 const fs = require("fs")
 let data = {}
@@ -92,12 +94,28 @@ Please use the following command to install dependencies: **${data.command}**
 Please use the following command to run tests--> **${data.runTest}**
 ### Questions: 
 ![alt text](${data.avatar_url})
-    `;
+    `
+    
+    const doc= new PDFDocument();
+    doc.pipe(fs.createWriteStream('output.pdf'))
+    ;
+    doc
+    .fontSize(25)
+    .text('readMe',100,100);
+    doc.end();
+
+
+
 
             fs.writeFile("README.md", license + body, function (error) {
                 if (error) {
                     console.log(error)
                 }
+                markdownpdf()
+                .from("README.md")
+                .to("readMe.pdf", function(){
+                    console.log("done")
+                })
                 console.log("success")
             })
 
