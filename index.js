@@ -81,6 +81,7 @@ function askQuestion() {
 ### Table of Contents:
     License
     Installation
+    Repo
     Test
     Questions
 
@@ -92,7 +93,7 @@ Please use the following command to install dependencies: **${data.command}**
 ### Repo: ${data.repo}
 ### Test: 
 Please use the following command to run tests--> **${data.runTest}**
-### Questions: 
+### Questions???: 
 ![alt text](${data.avatar_url})
     `
     
